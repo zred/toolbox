@@ -1,6 +1,6 @@
 # toolbox-win
 
-### Install via PowerShell
+### PowerShell Install Notes
 ```
 git clone https://github.com/zred/toolbox-win.git
 cd toolbox-win
