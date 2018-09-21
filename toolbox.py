@@ -34,9 +34,9 @@ def password():
         length = None
         if form.validate_on_submit():
                 length = form.length.data
-                return render_template('pwgen.html', password=gen_word(length), form=form)
+                return render_template('word.html', password=gen_word(length), form=form)
         else:
-                return render_template('pwgen.html', password=gen_word(), form=form)
+                return render_template('word.html', password=gen_word(), form=form)
 
 @app.route('/passphrase', methods=('GET', 'POST'))
 def passphrase():
@@ -44,9 +44,9 @@ def passphrase():
         length = None
         if form.validate_on_submit():
                 length = form.length.data
-                return render_template('ppgen.html', passphrase=gen_phrase(length), form=form)
+                return render_template('phrase.html', passphrase=gen_phrase(length), form=form)
         else:
-                return render_template('ppgen.html', passphrase=gen_phrase(), form=form)
+                return render_template('phrase.html', passphrase=gen_phrase(), form=form)
 
 
 if __name__ == '__main__':
