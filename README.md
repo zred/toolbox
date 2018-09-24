@@ -22,6 +22,8 @@ pip install -r .\requirements.txt
 .\toolbox.py
 ```
 
-### Vagrant
+### Vagrant Notes
 ```
+wget https://raw.githubusercontent.com/zred/toolbox/master/Vagrantfile
+vagrant up
 ```
