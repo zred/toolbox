@@ -1,8 +1,8 @@
-# toolbox-win
+# toolbox
 
 ### PowerShell Install Notes
 ```
-git clone https://github.com/zred/toolbox-win.git
+git clone https://github.com/zred/toolbox.git
 cd toolbox-win
 python -m venv .
 .\Scripts\Activate.ps1
