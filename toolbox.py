@@ -7,6 +7,7 @@ from diceware import handle_options
 from diceware import get_passphrase
 from random import choice
 from string import ascii_letters, digits, punctuation
+from psutil import disk_usage, disk_partitions
 
 char_set = ascii_letters + digits + punctuation
 def gen_word(length=12): return ''.join(choice(char_set) for _ in range(length))
@@ -47,7 +48,16 @@ def passphrase():
                 return render_template('phrase.html', passphrase=gen_phrase(length), form=form)
         else:
                 return render_template('phrase.html', passphrase=gen_phrase(), form=form)
-
+            
+@app.route('/disk', methods=['GET', 'POST'])
+def disk():
+        usage=[]
+        for l in disk_partitions():
+                try:
+                        usage.append((l.device,disk_usage(l.device).percent))
+                except:
+                        pass
+        return render_template('disk.html',usage=list(usage))
 
 if __name__ == '__main__':
         app.run(host='0.0.0.0', port=80, debug=True)
