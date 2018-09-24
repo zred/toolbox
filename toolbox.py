@@ -3,8 +3,7 @@ from flask_bootstrap import Bootstrap
 from flask_wtf import FlaskForm as Form
 from wtforms.validators import Required, NumberRange
 from wtforms import IntegerField, StringField, SubmitField
-from diceware import handle_options
-from diceware import get_passphrase
+from diceware import handle_options, get_passphrase
 from random import choice
 from string import ascii_letters, digits, punctuation
 from psutil import disk_usage, disk_partitions
