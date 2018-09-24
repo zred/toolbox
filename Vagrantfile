@@ -4,5 +4,6 @@
   config.vm.provision "shell", inline: <<-SHELL
     pacman -Syu --noconfirm
     pacman -Sy python python-pip git --noconfirm
+    git clone https://github.com/zred/toolbox
   SHELL
 end
