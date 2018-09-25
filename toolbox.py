@@ -58,7 +58,7 @@ def disk():
                         pass
         return render_template('disk.html',usage=list(usage))
     
-@app.route('/network', methods['GET', 'POST'])
+@app.route('/network', methods=['GET', 'POST'])
 def network():
     outbounds=[]
     for conn in net_connections():
