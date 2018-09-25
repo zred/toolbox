@@ -60,14 +60,13 @@ def disk():
     
 @app.route('/network', methods=['GET', 'POST'])
 def network():
-    outbounds=[]
+    est=[]
     for conn in net_connections():
         if conn.status == 'ESTABLISHED':
-            if conn.raddr[0] != '127.0.0.1':
                 for proc in process_iter():
-                    if proc.pid == conn.pid:
-                        outbounds.append( proc.name() +' pid '+ str(conn.pid) +' port '+ str(conn.laddr[1]) +' > '+ conn.raddr[0] +':'+ str(conn.raddr[1]) )
-    return render_template('network.html', outbounds=list(outbounds))
+                        if proc.pid == conn.pid:
+                                est.append( proc.name() +' pid '+ str(conn.pid) +' port '+ str(conn.laddr[1]) +' > '+ conn.raddr[0] +':'+ str(conn.raddr[1]) )
+    return render_template('network.html', est=est)
 
 if __name__ == '__main__':
         app.run(host='0.0.0.0', port=80, debug=True)
