@@ -6,7 +6,7 @@ from wtforms import IntegerField, StringField, SubmitField
 from diceware import handle_options, get_passphrase
 from random import choice
 from string import ascii_letters, digits, punctuation
-from psutil import disk_usage, disk_partitions
+from psutil import disk_usage, disk_partitions, net_connections, process_iter
 
 char_set = ascii_letters + digits + punctuation
 def gen_word(length=12): return ''.join(choice(char_set) for _ in range(length))
@@ -57,6 +57,17 @@ def disk():
                 except:
                         pass
         return render_template('disk.html',usage=list(usage))
+    
+@app.route('/network', methods['GET', 'POST'])
+def network():
+    outbounds=[]
+    for conn in net_connections():
+    if conn.status == 'ESTABLISHED':
+        if conn.raddr[0] != '127.0.0.1':
+            for proc in process_iter():
+                if proc.pid == conn.pid:
+                    outbounds.append( proc.name() +' pid '+ str(conn.pid) +' port '+ str(conn.laddr[1]) +' > '+ conn.raddr[0] +':'+ str(conn.raddr[1]) )
+    return render_template('network.html',outbounds=outbbounds)
 
 if __name__ == '__main__':
         app.run(host='0.0.0.0', port=80, debug=True)
