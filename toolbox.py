@@ -62,11 +62,11 @@ def disk():
 def network():
     outbounds=[]
     for conn in net_connections():
-    if conn.status == 'ESTABLISHED':
-        if conn.raddr[0] != '127.0.0.1':
-            for proc in process_iter():
-                if proc.pid == conn.pid:
-                    outbounds.append( proc.name() +' pid '+ str(conn.pid) +' port '+ str(conn.laddr[1]) +' > '+ conn.raddr[0] +':'+ str(conn.raddr[1]) )
+        if conn.status == 'ESTABLISHED':
+            if conn.raddr[0] != '127.0.0.1':
+                for proc in process_iter():
+                    if proc.pid == conn.pid:
+                        outbounds.append( proc.name() +' pid '+ str(conn.pid) +' port '+ str(conn.laddr[1]) +' > '+ conn.raddr[0] +':'+ str(conn.raddr[1]) )
     return render_template('network.html',outbounds=outbbounds)
 
 if __name__ == '__main__':
