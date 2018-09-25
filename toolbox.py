@@ -67,7 +67,7 @@ def network():
                 for proc in process_iter():
                     if proc.pid == conn.pid:
                         outbounds.append( proc.name() +' pid '+ str(conn.pid) +' port '+ str(conn.laddr[1]) +' > '+ conn.raddr[0] +':'+ str(conn.raddr[1]) )
-    return render_template('network.html',outbounds=list(outbbounds))
+    return render_template('network.html', outbounds=list(outbbounds))
 
 if __name__ == '__main__':
         app.run(host='0.0.0.0', port=80, debug=True)
