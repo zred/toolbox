@@ -15,7 +15,7 @@ def gen_phrase(length=5): return get_passphrase(handle_options(["-n",str(length)
 app = Flask(__name__)
 bootstrap = Bootstrap(app)
 app.config['SECRET_KEY'] = gen_word(8)
-
+      
 class PasswordForm(Form):
     length = IntegerField('Number of Symbols?', validators=[Required(), NumberRange(min=1, max=30, message="Should be between 1 and 30")])
     submit = SubmitField('Submit')
@@ -60,18 +60,13 @@ def disk():
     
 @app.route('/network', methods=['GET', 'POST'])
 def network():
+        cs=filter(lambda x: x.status == 'ESTABLISHED' and x.raddr[0] != '127.0.0.1',net_connections())
         out=[]
-        inb=[]
-        for conn in net_connections():
-                if conn.status == 'ESTABLISHED':
-                        for proc in process_iter():
-                                if proc.pid == conn.pid:               
-                                        if conn.raddr[0] == '127.0.0.1':
-                                                inb.append( proc.name() +' pid '+ str(conn.pid) +' port '+ str(conn.laddr[1]) +' > localhost:'+ str(conn.raddr[1]) ) 
-                                        else:
-                                                out.append( proc.name() +' pid '+ str(conn.pid) +' port '+ str(conn.laddr[1]) +' > '+ conn.raddr[0] +':'+ str(conn.raddr[1]) ) 
-                    
-        return render_template('network.html', out=out, inb=inb)
+        for c in cs:
+                for p in process_iter():
+                        if p.pid == c.pid:
+                                 out.append('{} pid {} port {} > {}:{}'.format(p.name(), c.pid, c.laddr[1], c.raddr[0], c.raddr[1]))          
+        return render_template('network.html', out=out)
 
 if __name__ == '__main__':
         app.run(host='0.0.0.0', port=80, debug=True)
