@@ -65,7 +65,7 @@ def network():
         for c in cs:
                 for p in process_iter():
                         if p.pid == c.pid:
-                                 out.append('{} pid {} port {} > {}:{}'.format(p.name(), c.pid, c.laddr[1], c.raddr[0], c.raddr[1]))          
+                                 out.append('{}({}) port {} > {}:{}'.format(p.name(), c.pid, c.laddr[1], c.raddr[0], c.raddr[1]))          
         return render_template('network.html', out=out)
 
 if __name__ == '__main__':
