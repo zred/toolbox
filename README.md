@@ -6,7 +6,7 @@ git clone https://github.com/zred/toolbox.git
 cd toolbox
 python -m venv .
 source bin/activate
-pip install --upgrade pip
+python -m pip install --upgrade pip
 pip install -r requirements.txt
 python toolbox.py
 ```
