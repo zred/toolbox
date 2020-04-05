@@ -9,5 +9,5 @@ Jinja2==2.10
 MarkupSafe==1.0
 psutil==5.4.7
 visitor==0.1.3
-Werkzeug==0.14.1
+Werkzeug==0.15.3
 WTForms==2.2.1
